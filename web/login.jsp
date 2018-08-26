@@ -17,7 +17,6 @@
         function refreshCode() {
             //获取验证图片
             var vcode = document.getElementById("vcode");
-
             vcode.src = "${pageContext.request.contextPath}/checkCodeServlet?time="+new Date().getTime();
         }
     </script>

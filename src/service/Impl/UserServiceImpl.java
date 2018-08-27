@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageBean<User> findUserByPage(String _currentPage, String _rows, Map<String, String[]> condition) {
+    public PageBean<User> findUserByPage(String _currentPage, String _rows) {
         int currentPage = Integer.parseInt(_currentPage);
         int rows = Integer.parseInt(_rows);
 
@@ -72,16 +72,16 @@ public class UserServiceImpl implements UserService {
         pb.setRows(rows);
 
         //调用dao查询总记录
-        int totalCount = dao.findTotalCount(condition);
+        int totalCount = dao.findTotalCount();
         pb.setTotalCount(totalCount);
 
         //调用dao查询List集合
         int start = (currentPage -1) * rows;
-        List<User> list = dao.findByPage(start,rows,condition);
+        List<User> list = dao.findByPage(start,rows);
         pb.setList(list);
 
         //计算总的页码数
-        int totalPage = (totalCount % rows) == 0? totalCount/rows : (totalCount/rows) + 1;
+        int totalPage = (totalCount % rows) == 0 ? totalCount/rows : (totalCount/rows) + 1;
         pb.setTotalPage(totalPage);
 
         return pb;

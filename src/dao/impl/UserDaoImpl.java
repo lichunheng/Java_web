@@ -62,14 +62,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int findTotalCount(Map<String, String[]> condition) {
+    public int findTotalCount() {
         String sql = "select count(*) from user";
         return tmplate.queryForObject(sql,Integer.class);
     }
 
     @Override
-    public List<User> findByPage(int start, int rows, Map<String, String[]> condition) {
-        String sql = "select * from user limit ?,?";
-        return (List<User>) tmplate.queryForObject(sql,new BeanPropertyRowMapper<User>(User.class),start,rows);
+    public List<User> findByPage(int start, int rows) {
+            String sql = "select * from user limit ?,?";
+            return tmplate.query(sql,new BeanPropertyRowMapper<User>(User.class),start,rows);
     }
 }

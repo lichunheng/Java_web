@@ -24,5 +24,5 @@ public interface UserService {
 
     User findUserById(String id);
 
-    PageBean<User> findUserByPage(String currentPage, String rows, Map<String, String[]> condition);
+    PageBean<User> findUserByPage(String currentPage, String rows);
 }

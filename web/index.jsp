@@ -21,7 +21,7 @@
 <div align="center">
   <a
           <%--意思就是取出部署的应用程序名或者是当前的项目名称 --%>
-          href="${pageContext.request.contextPath}/userListServlet" style="text-decoration:none;font-size:33px">查询所有用户信息
+          href="${pageContext.request.contextPath}/findUserByPageServlet" style="text-decoration:none;font-size:33px">查询所有用户信息
   </a>
 </div>
 </body>

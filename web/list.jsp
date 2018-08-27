@@ -28,9 +28,6 @@
         .fm{
             margin: 15px 15px;
         }
-        .nav_page{
-            margin: 0px 113px;
-        }
     </style>
     <script type="text/javascript">
         function deleteUser(id){
@@ -88,16 +85,16 @@
         <form class="form-inline" action="${pageContext.request.contextPath}/findUserByPageServlet" method="post">
             <div class="form-group">
                 <label for="exampleInputName2">姓名</label>
-                <input type="text" name="name" value="${condition.name[0]}" class="form-control" id="exampleInputName2" >
+                <input type="text" name="name" value="" class="form-control" id="exampleInputName2" >
             </div>
             <div class="form-group">
                 <label for="exampleInputName3">籍贯</label>
-                <input type="text" name="address" value="${condition.address[0]}" class="form-control" id="exampleInputName3" >
+                <input type="text" name="address" value="" class="form-control" id="exampleInputName3" >
             </div>
 
             <div class="form-group">
                 <label for="exampleInputEmail2">邮箱</label>
-                <input type="text" name="email" value="${condition.email[0]}" class="form-control" id="exampleInputEmail2"  >
+                <input type="text" name="email" value="" class="form-control" id="exampleInputEmail2"  >
             </div>
             <button type="submit" class="btn btn-default">查询</button>
         </form>
@@ -126,7 +123,7 @@
                 <th>邮箱</th>
                 <th>操作</th>
             </tr>
-            <c:forEach items="${pb.users}" var = "user"  varStatus="s">
+            <c:forEach items="${pb.list}" var = "user"  varStatus="s">
                 <tr>
                     <td><input type="checkbox" name="uid" value="${user.id}"></td>
                     <th>${s.count}</th>
@@ -150,39 +147,40 @@
     <div>
         <nav aria-label="Page navigation">
             <ul class="pagination">
-                    <c:if test="${pb.currentPage == 1}">
-                <li class="disabled">
-                    </c:if>
-                    <c:if test="${pb.currentPage != 1}">
+                <%--判断当前页是不是第一页，如果为第一页则禁用左右增减--%>
+                <c:if test="${pb.currentPage == 1}">
+                    <li class="disabled">
+                </c:if>
+                <c:if test="${pb.currentPage != 1}">
+                    <li>
+                </c:if>
+
                 <li>
-                    </c:if>
-                    <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${pb.currentPage - 1}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}" aria-label="Previous">
+                    <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${pb.currentPage - 1}&rows=5" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-
-                <c:forEach begin="1" end="${pb.totalPage}" var="i" >
+                <c:forEach begin="1" end="${pb.totalPage}" var="i">
+                    <%--判断当前页码是否等于i--%>
                     <c:if test="${pb.currentPage == i}">
-                        <li class="active"><a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}">${i}</a></li>
+                        <li class="active"><a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=5">${i}</a></li>
                     </c:if>
                     <c:if test="${pb.currentPage != i}">
-                        <li><a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}">${i}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=5">${i}</a></li>
                     </c:if>
                 </c:forEach>
-
-
                 <li>
-                    <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${pb.currentPage + 1}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}" aria-label="Next">
+                    <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${pb.currentPage +1}&rows=5" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
                 <span style="font-size: 25px;margin-left: 5px;">
                     共${pb.totalCount}条记录，共${pb.totalPage}页
                 </span>
-
             </ul>
         </nav>
     </div>
+
 </div>
 </body>
 </html>

@@ -16,11 +16,12 @@ import java.util.List;
 @WebServlet("/userListServlet")
 public class UserListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserService service = new UserServiceImpl();
-        List<User> users = service.findAll();
-
-        request.setAttribute("users",users);
-        request.getRequestDispatcher("/list.jsp").forward(request,response);
+//        UserService service = new UserServiceImpl();
+//        List<User> users = service.findAll();
+//
+//        request.setAttribute("users",users);
+//        response.sendRedirect("/findUserByPageServlet");
+        request.getRequestDispatcher("/findUserByPageServlet").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
